@@ -14,3 +14,8 @@ class Map_Engine():
         map_data.remove(map_size)
         map_size = map_size.split(",")
         map_size[0] = int(map_size[0])*room_settings.screen_tile
+        map_size[1] = int(map_size[1])*room_settings.screen_tile
+        tiles = []
+        for tile in range(len(map_data)):
+            map_data[tile] = map_data[tile].replace("\n", "")
+            tiles.append(map_data[tile])
