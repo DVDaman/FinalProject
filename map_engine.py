@@ -18,4 +18,14 @@ class Map_Engine():
         tiles = []
         for tile in range(len(map_data)):
             map_data[tile] = map_data[tile].replace("\n", "")
-            tiles.append(map_data[tile])
+            tiles.append(map_data[tile].split(":")) #Split position from texture
+        for tile in tiles:
+            tile[0] = tile[0].split(",")
+            pos = tile[0]
+            for p in pos:
+                pos[pos.index(p)] = int(p) #Convert from text to int
+            tiles[tiles.index(tile)] = (pos, tile[1]) #Save to tile list
+        #Create terrain as one object
+        terrain = pygame.Surface(map_size, pygame.HWSURFACE)
+        for tile in tiles:
+            if tile[1] in 

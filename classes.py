@@ -102,6 +102,8 @@ class Tiles():
         self.t7tl = pygame.transform.scale(pygame.image.load(os.path.join('finalProject/models/map','7tl.png')), (room_settings.screen_tile, room_settings.screen_tile))
         self.t7tr = pygame.transform.scale(pygame.image.load(os.path.join('finalProject/models/map','7tr.png')), (room_settings.screen_tile, room_settings.screen_tile))
 
+        self.texture_tags = {"1":self.t1, "2":self.t2, "2b":self.t2b, "2bl":self.t2bl, "2br":self.t2br}
+
         self.sky = pygame.image.load(os.path.join('finalProject/models/map', 'sky.png'))
         self.Sky = pygame.Surface(self.sky.get_size(), pygame.HWSURFACE|pygame.DOUBLEBUF|pygame.SRCALPHA)
         self.Sky.blit(self.sky, (0,0))
