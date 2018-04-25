@@ -72,6 +72,10 @@ class Tiles():
         self.t2b = pygame.transform.scale(pygame.image.load(os.path.join('finalProject/models/map','2b.png')), (room_settings.screen_tile, room_settings.screen_tile))
         self.t2bl = pygame.transform.scale(pygame.image.load(os.path.join('finalProject/models/map','2bl.png')), (room_settings.screen_tile, room_settings.screen_tile))
         self.t2br = pygame.transform.scale(pygame.image.load(os.path.join('finalProject/models/map','2br.png')), (room_settings.screen_tile, room_settings.screen_tile))
+        self.t2ibl = pygame.transform.scale(pygame.image.load(os.path.join('finalProject/models/map','2ibl.png')), (room_settings.screen_tile, room_settings.screen_tile))
+        self.t2ibr = pygame.transform.scale(pygame.image.load(os.path.join('finalProject/models/map','2ibr.png')), (room_settings.screen_tile, room_settings.screen_tile))
+        self.t2itl = pygame.transform.scale(pygame.image.load(os.path.join('finalProject/models/map','2itl.png')), (room_settings.screen_tile, room_settings.screen_tile))
+        self.t2itr = pygame.transform.scale(pygame.image.load(os.path.join('finalProject/models/map','2itr.png')), (room_settings.screen_tile, room_settings.screen_tile))
         self.t2l = pygame.transform.scale(pygame.image.load(os.path.join('finalProject/models/map','2l.png')), (room_settings.screen_tile, room_settings.screen_tile))
         self.t2r = pygame.transform.scale(pygame.image.load(os.path.join('finalProject/models/map','2r.png')), (room_settings.screen_tile, room_settings.screen_tile))
         self.t2t = pygame.transform.scale(pygame.image.load(os.path.join('finalProject/models/map','2t.png')), (room_settings.screen_tile, room_settings.screen_tile))
@@ -102,7 +106,7 @@ class Tiles():
         self.t7tl = pygame.transform.scale(pygame.image.load(os.path.join('finalProject/models/map','7tl.png')), (room_settings.screen_tile, room_settings.screen_tile))
         self.t7tr = pygame.transform.scale(pygame.image.load(os.path.join('finalProject/models/map','7tr.png')), (room_settings.screen_tile, room_settings.screen_tile))
 
-        self.texture_tags = {"1":self.t1, "2":self.t2, "2b":self.t2b, "2bl":self.t2bl, "2br":self.t2br, "2l":self.t2l, "2r":self.t2r, "2t":self.t2t, "2tl":self.t2tl, "2tr":self.t2tr, "3":self.t3, "3b":self.t3b, "3bl":self.t3bl, "3br":self.t3br, "3l":self.t3l, "3r":self.t3r, "3t":self.t3t, "3tl":self.t3tl, "3tr":self.t3tr, "4":self.t4, "4bl":self.t4bl, "4br":self.t4br, "4t":self.t4t, "4tl":self.t4tl, "4tr":self.t4tr, "5":self.t5, "6h":self.t6h, "6v":self.t6v, "7":self.t7, "7bl":self.t7bl, "7br":self.t7br, "7t":self.t7t, "7tl":self.t7tl, "7tr":self.t7tr}
+        self.texture_tags = {"1":self.t1, "2":self.t2, "2b":self.t2b, "2bl":self.t2bl, "2br":self.t2br, "2ibl":self.t2ibl, "2ibr":self.t2ibr, "2itl":self.t2itl, "2itr":self.t2itr, "2l":self.t2l, "2r":self.t2r, "2t":self.t2t, "2tl":self.t2tl, "2tr":self.t2tr, "3":self.t3, "3b":self.t3b, "3bl":self.t3bl, "3br":self.t3br, "3l":self.t3l, "3r":self.t3r, "3t":self.t3t, "3tl":self.t3tl, "3tr":self.t3tr, "4":self.t4, "4bl":self.t4bl, "4br":self.t4br, "4t":self.t4t, "4tl":self.t4tl, "4tr":self.t4tr, "5":self.t5, "6h":self.t6h, "6v":self.t6v, "7":self.t7, "7bl":self.t7bl, "7br":self.t7br, "7t":self.t7t, "7tl":self.t7tl, "7tr":self.t7tr}
 
         self.sky = pygame.transform.scale(pygame.image.load(os.path.join('finalProject/models/map', 'sky.png')), (room_settings.screen_width, room_settings.screen_height))
         self.Sky = pygame.Surface(self.sky.get_size(), pygame.HWSURFACE|pygame.DOUBLEBUF|pygame.SRCALPHA)

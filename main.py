@@ -25,7 +25,7 @@ def setup():
     countFrame = 0
     FPS = 0
     deltatime = 0
-    fps_font = pygame.font.Font("C://Windows//Fonts//PrestigeEliteStd-Bd.otf", (room_settings.magnification*6))
+    fps_font = pygame.font.Font("C://Windows//Fonts//PrestigeEliteStd-Bd.otf", (room_settings.magnification*10))
     tiles = Tiles(room_settings)
     terrain = map_engine.load_map(os.path.join("finalProject/map", "world.map"))
 
@@ -62,4 +62,4 @@ while True:
     #Reloads the screen
     pygame.display.update()
     count_fps()
-    clock.tick(100)
+    # clock.tick(100)
