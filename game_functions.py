@@ -44,9 +44,10 @@ def check_events(p, camera_settings):
         elif event.type == KEYUP:
             check_keyup_events(p, event, camera_settings)
 
-def update_screen(room_settings, screen, p, tiles, camera_settings):
-    screen.fill(room_settings.bg_color)
-    render_terrain(room_settings, screen, tiles, camera_settings)
+def update_screen(room_settings, screen, p, tiles, camera_settings, terrain):
+    screen.blit(tiles.Sky, (0,0))
+    screen.blit(terrain, (camera_settings.camerax, camera_settings.cameray))
+    # render_terrain(room_settings, screen, tiles, camera_settings)
     p.blitme()
 
 def render_terrain(room_settings, screen, tiles, camera_settings):

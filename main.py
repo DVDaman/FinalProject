@@ -4,16 +4,19 @@ from classes import *
 import game_functions as gf
 from pygame.sprite import Group
 from mapData import *
+from map_engine import *
 
 pygame.init()
+
 
 clock = pygame.time.Clock()
 
 def setup():
-    global room_settings, screen, bg_color, p, player_settings, countSec, countFrame, FPS, fps_font, tiles, camera_settings, deltatime
+    global room_settings, screen, bg_color, p, player_settings, countSec, countFrame, FPS, fps_font, tiles, camera_settings, deltatime, terrain, map_engine
     room_settings = RoomSettings()
     player_settings = PlayerSettings(room_settings)
     camera_settings = CameraSettings()
+    map_engine = Map_Engine()
     screen = pygame.display.set_mode((room_settings.screen_width, room_settings.screen_height), pygame.HWSURFACE|pygame.SRCALPHA|pygame.DOUBLEBUF)
     pygame.display.set_caption("r/GantMemes")
     bg_color = room_settings.bg_color
@@ -24,6 +27,7 @@ def setup():
     deltatime = 0
     fps_font = pygame.font.Font("C://Windows//Fonts//PrestigeEliteStd-Bd.otf", (room_settings.magnification*6))
     tiles = Tiles(room_settings)
+    terrain = map_engine.load_map(os.path.join("finalProject/map", "world.map"))
 
 def show_fps():
     fps_overlay = fps_font.render("FPS: "+str(FPS), True, (0, 255, 0, 100))
@@ -52,7 +56,7 @@ while True:
     
 
 
-    gf.update_screen(room_settings, screen, p, tiles, camera_settings)
+    gf.update_screen(room_settings, screen, p, tiles, camera_settings, terrain)
 
     show_fps()
     #Reloads the screen
