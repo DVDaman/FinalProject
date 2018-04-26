@@ -67,6 +67,8 @@ class PlayerSettings():
 
 class Tiles():
     def __init__(self, room_settings):
+
+        ################
         self.t1 = pygame.transform.scale(pygame.image.load(os.path.join('finalProject/models/map','1.png')), (room_settings.screen_tile, room_settings.screen_tile))
         self.t2 = pygame.transform.scale(pygame.image.load(os.path.join('finalProject/models/map','2.png')), (room_settings.screen_tile, room_settings.screen_tile))
         self.t2b = pygame.transform.scale(pygame.image.load(os.path.join('finalProject/models/map','2b.png')), (room_settings.screen_tile, room_settings.screen_tile))
@@ -105,8 +107,49 @@ class Tiles():
         self.t7t = pygame.transform.scale(pygame.image.load(os.path.join('finalProject/models/map','7t.png')), (room_settings.screen_tile, room_settings.screen_tile))
         self.t7tl = pygame.transform.scale(pygame.image.load(os.path.join('finalProject/models/map','7tl.png')), (room_settings.screen_tile, room_settings.screen_tile))
         self.t7tr = pygame.transform.scale(pygame.image.load(os.path.join('finalProject/models/map','7tr.png')), (room_settings.screen_tile, room_settings.screen_tile))
-
+        ###################
+        self.u1 = pygame.image.load(os.path.join('finalProject/models/map','1.png'))
+        self.u2 = pygame.image.load(os.path.join('finalProject/models/map','2.png'))
+        self.u2b = pygame.image.load(os.path.join('finalProject/models/map','2b.png'))
+        self.u2bl = pygame.image.load(os.path.join('finalProject/models/map','2bl.png'))
+        self.u2br = pygame.image.load(os.path.join('finalProject/models/map','2br.png'))
+        self.u2ibl = pygame.image.load(os.path.join('finalProject/models/map','2ibl.png'))
+        self.u2ibr = pygame.image.load(os.path.join('finalProject/models/map','2ibr.png'))
+        self.u2itl = pygame.image.load(os.path.join('finalProject/models/map','2itl.png'))
+        self.u2itr = pygame.image.load(os.path.join('finalProject/models/map','2itr.png'))
+        self.u2l = pygame.image.load(os.path.join('finalProject/models/map','2l.png'))
+        self.u2r = pygame.image.load(os.path.join('finalProject/models/map','2r.png'))
+        self.u2t = pygame.image.load(os.path.join('finalProject/models/map','2t.png'))
+        self.u2tl = pygame.image.load(os.path.join('finalProject/models/map','2tl.png'))
+        self.u2tr = pygame.image.load(os.path.join('finalProject/models/map','2tr.png'))
+        self.u3 = pygame.image.load(os.path.join('finalProject/models/map','3.png'))
+        self.u3b = pygame.image.load(os.path.join('finalProject/models/map','3b.png'))
+        self.u3bl = pygame.image.load(os.path.join('finalProject/models/map','3bl.png'))
+        self.u3br = pygame.image.load(os.path.join('finalProject/models/map','3br.png'))
+        self.u3l = pygame.image.load(os.path.join('finalProject/models/map','3l.png'))
+        self.u3r = pygame.image.load(os.path.join('finalProject/models/map','3r.png'))
+        self.u3t = pygame.image.load(os.path.join('finalProject/models/map','3t.png'))
+        self.u3tl = pygame.image.load(os.path.join('finalProject/models/map','3tl.png'))
+        self.u3tr = pygame.image.load(os.path.join('finalProject/models/map','3tr.png'))
+        self.u4 = pygame.image.load(os.path.join('finalProject/models/map','4.png'))
+        self.u4bl = pygame.image.load(os.path.join('finalProject/models/map','4bl.png'))
+        self.u4br = pygame.image.load(os.path.join('finalProject/models/map','4br.png'))
+        self.u4t = pygame.image.load(os.path.join('finalProject/models/map','4t.png'))
+        self.u4tl = pygame.image.load(os.path.join('finalProject/models/map','4tl.png'))
+        self.u4tr = pygame.image.load(os.path.join('finalProject/models/map','4tr.png'))
+        self.u5 = pygame.image.load(os.path.join('finalProject/models/map','5.png'))
+        self.u6h = pygame.image.load(os.path.join('finalProject/models/map','6h.png'))
+        self.u6v = pygame.image.load(os.path.join('finalProject/models/map','6v.png'))
+        self.u7 = pygame.image.load(os.path.join('finalProject/models/map','7.png'))
+        self.u7bl = pygame.image.load(os.path.join('finalProject/models/map','7bl.png'))
+        self.u7br = pygame.image.load(os.path.join('finalProject/models/map','7br.png'))
+        self.u7t = pygame.image.load(os.path.join('finalProject/models/map','7t.png'))
+        self.u7tl = pygame.image.load(os.path.join('finalProject/models/map','7tl.png'))
+        self.u7tr = pygame.image.load(os.path.join('finalProject/models/map','7tr.png'))
+        ###############
         self.texture_tags = {"1":self.t1, "2":self.t2, "2b":self.t2b, "2bl":self.t2bl, "2br":self.t2br, "2ibl":self.t2ibl, "2ibr":self.t2ibr, "2itl":self.t2itl, "2itr":self.t2itr, "2l":self.t2l, "2r":self.t2r, "2t":self.t2t, "2tl":self.t2tl, "2tr":self.t2tr, "3":self.t3, "3b":self.t3b, "3bl":self.t3bl, "3br":self.t3br, "3l":self.t3l, "3r":self.t3r, "3t":self.t3t, "3tl":self.t3tl, "3tr":self.t3tr, "4":self.t4, "4bl":self.t4bl, "4br":self.t4br, "4t":self.t4t, "4tl":self.t4tl, "4tr":self.t4tr, "5":self.t5, "6h":self.t6h, "6v":self.t6v, "7":self.t7, "7bl":self.t7bl, "7br":self.t7br, "7t":self.t7t, "7tl":self.t7tl, "7tr":self.t7tr}
+
+        self.utexture_tags = {"1":self.u1, "2":self.u2, "2b":self.u2b, "2bl":self.u2bl, "2br":self.u2br, "2ibl":self.u2ibl, "2ibr":self.u2ibr, "2itl":self.u2itl, "2itr":self.u2itr, "2l":self.u2l, "2r":self.u2r, "2t":self.u2t, "2tl":self.u2tl, "2tr":self.u2tr, "3":self.u3, "3b":self.u3b, "3bl":self.u3bl, "3br":self.u3br, "3l":self.u3l, "3r":self.u3r, "3t":self.u3t, "3tl":self.u3tl, "3tr":self.u3tr, "4":self.u4, "4bl":self.u4bl, "4br":self.u4br, "4t":self.u4t, "4tl":self.u4tl, "4tr":self.u4tr, "5":self.u5, "6h":self.u6h, "6v":self.u6v, "7":self.u7, "7bl":self.u7bl, "7br":self.u7br, "7t":self.u7t, "7tl":self.u7tl, "7tr":self.u7tr}
 
         self.sky = pygame.transform.scale(pygame.image.load(os.path.join('finalProject/models/map', 'sky.png')), (room_settings.screen_width, room_settings.screen_height))
         self.Sky = pygame.Surface(self.sky.get_size(), pygame.HWSURFACE|pygame.DOUBLEBUF|pygame.SRCALPHA)
