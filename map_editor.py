@@ -57,30 +57,30 @@ camera_move = 0
 
 brush = "1"
 
-map_engine = Map_Engine()
-terrain = map_engine.load_map(os.path.join("finalProject/map", "world.map"))
+# map_engine = Map_Engine()
+# terrain = map_engine.load_map(os.path.join("finalProject/map", "world.map"))
 
 
-with open(os.path.join("finalProject/map", "world.map"), "r") as mapfile:
-    map_data = mapfile.read()
-#Read tile data
-map_data = map_data.split("-") #Splits the tiles at the -'s
-map_size = map_data[len(map_data)-1] #Map dimentions
-map_data.remove(map_size)
-map_size = map_size.split(",")
-map_size[0] = int(map_size[0])*room_settings.screen_tile
-map_size[1] = int(map_size[1])*room_settings.screen_tile
-tile_data = []
-for tile in range(len(map_data)):
-    map_data[tile] = map_data[tile].replace("\n", "")
-    tile_data.append(map_data[tile].split(":")) #Split position from texture
-for tile in tile_data:
-    ggg = tile[0]
-    tile[0] = tile[0].split(",")
-    pos = tile[0]
-    for p in pos:
-        pos[pos.index(p)] = int(p) #Convert from text to int
-    tile_data[tile_data.index(tile)] = (pos, tile[1]) #Save to tile list
+# with open(os.path.join("finalProject/map", "world.map"), "r") as mapfile:
+#     map_data = mapfile.read()
+# #Read tile data
+# map_data = map_data.split("-") #Splits the tiles at the -'s
+# map_size = map_data[len(map_data)-1] #Map dimentions
+# map_data.remove(map_size)
+# map_size = map_size.split(",")
+# map_size[0] = int(map_size[0])*room_settings.screen_tile
+# map_size[1] = int(map_size[1])*room_settings.screen_tile
+# tile_data = []
+# for tile in range(len(map_data)):
+#     map_data[tile] = map_data[tile].replace("\n", "")
+#     tile_data.append(map_data[tile].split(":")) #Split position from texture
+# for tile in tile_data:
+#     ggg = tile[0]
+#     tile[0] = tile[0].split(",")
+#     pos = tile[0]
+#     for p in pos:
+#         pos[pos.index(p)] = int(p) #Convert from text to int
+#     tile_data[tile_data.index(tile)] = (pos, tile[1]) #Save to tile list
 
 
 # Initialize Default Map
