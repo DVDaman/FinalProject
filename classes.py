@@ -112,6 +112,7 @@ class Tiles():
         self.Sky = pygame.Surface(self.sky.get_size(), pygame.HWSURFACE|pygame.DOUBLEBUF|pygame.SRCALPHA)
         self.Sky.blit(self.sky, (0,0))
         del self.sky
+        self.size = room_settings.screen_tile
     def loadtexture(self, file, room_settings):
         bitmap = file
         surface = pygame.Surface((room_settings.screen_tile, room_settings.screen_tile), pygame.HWSURFACE|pygame.SRCALPHA|pygame.DOUBLEBUF)

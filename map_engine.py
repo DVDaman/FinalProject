@@ -6,7 +6,7 @@ t = Tiles(room_settings)
 class Map_Engine():
     def __init__(self):
         self.a = "map"
-    def add_tile(self,tile, pos, addTo):
+    def add_tile(self, tile, pos, addTo):
         addTo.blit(tile, (pos[0]*room_settings.screen_tile, pos[1]*room_settings.screen_tile))
     def load_map(self, file):
         with open(file, "r") as mapfile:
