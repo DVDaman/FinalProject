@@ -62,4 +62,4 @@ while True:
     #Reloads the screen
     pygame.display.update()
     count_fps()
-    # clock.tick(100)
+    clock.tick(100)
