@@ -2,7 +2,7 @@
 import pygame, sys, time, os
 from pygame.locals import *
 from classes import Player, PlayerSettings, RoomSettings
-from mapData import *
+
 
 
 

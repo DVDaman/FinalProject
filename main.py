@@ -3,7 +3,6 @@ from pygame.locals import *
 from classes import *
 import game_functions as gf
 from pygame.sprite import Group
-from mapData import *
 from map_engine import *
 
 pygame.init()

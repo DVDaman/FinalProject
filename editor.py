@@ -47,6 +47,38 @@ while True:
                 camera_move = 3
             elif event.key == pygame.K_d:
                 camera_move = 4
+
+            #Brushes
+            if event.key == pygame.K_BACKSPACE:
+                brush = "r"
+            if event.key == pygame.K_1:
+                brush = "1"                
+            if event.key == pygame.K_2:
+                brush = "2"
+            if event.key == pygame.K_3:
+                brush = "3"
+            if event.key == pygame.K_4:
+                brush = "4"
+            if event.key == pygame.K_5:
+                brush = "5"
+            if event.key == pygame.K_6:
+                brush = "6"
+            if event.key == pygame.K_7:
+                brush = "7"
+            if event.key == pygame.K_t:
+                brush = brush + "t"
+            if event.key == pygame.K_r:
+                brush = brush + "r"
+            if event.key == pygame.K_b:
+                brush = brush + "b"
+            if event.key == pygame.K_l:
+                brush = brush + "l"
+            if event.key == pygame.K_i:
+                brush = brush + "i"
+            if event.key == pygame.K_h:
+                brush = brush + "h"
+            if event.key == pygame.K_v:
+                brush = brush + "v"
         elif event.type == pygame.KEYUP:
             camera_move = 0
 
@@ -54,6 +86,25 @@ while True:
             mouse_pos = pygame.mouse.get_pos()
             mouse_x = math.floor(mouse_pos[0]/room_settings.tile_size)*room_settings.tile_size
             mouse_y = math.floor(mouse_pos[1]/room_settings.tile_size)*room_settings.tile_size
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            tile = [mouse_x - camera_x, mouse_y - camera_y, brush] #List boi
+            found = False
+            for t in tile_data:
+                if t[0] == tile[0] and t[1] == tile[1]:
+                    found = True
+                    break
+            if not found:
+                if not brush == "r":
+                    tile_data.append(tile)
+            else:
+                if brush == "r":
+                    #Remove tile
+                    for t in tile_data:
+                        if t[0] == tile[0] and t[1] == tile[1]:
+                            tile_data.remove(t)
+                            print("Gone")
+                else:
+                    print("No thanks.")
     #Logic
     if camera_move == 1:
         camera_y += room_settings.tile_size
