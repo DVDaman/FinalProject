@@ -5,6 +5,25 @@ from classes import *
 room_settings = RoomSettings()
 til = Tiles(room_settings)
 
+def export_map(file):
+    
+    map_data = ""
+    #Get Map Dimensions
+    max_x = 0
+    max_y = 0
+    for t in tile_data:
+        if t[0] > max_x:
+            max_x = t[0]
+        if t[1] > max_y:
+            max_y = t[1]
+    #Save Map Tiles
+    for tile in tile_data:
+        map_data = map_data + str(int(tile[0]/room_settings.screen_tile)) + "," + str(int(tile[1]/room_settings.screen_tile)) + ":" + tile[2] + "-"
+    #Save Map Dimensions
+    map_data = map_data + str(int(max_x/room_settings.screen_tile)) + "," + str(int(max_y/room_settings.screen_tile))
+    #Write Map File
+    with open(file, "w") as mapfile:
+        mapfile.write(map_data)
 window = pygame.display.set_mode((1280, 720), pygame.HWSURFACE)
 pygame.display.set_caption("Map Editor")
 clock = pygame.time.Clock()
@@ -47,7 +66,11 @@ while True:
                 camera_move = 3
             elif event.key == pygame.K_d:
                 camera_move = 4
-
+            #Saving
+            if event.key == pygame.K_RETURN:
+                filename = input("File name: ")
+                export_map(os.path.join("finalProject/map", (filename + ".map")))
+                print("Success")
             #Brushes
             if event.key == pygame.K_BACKSPACE:
                 brush = "r"
