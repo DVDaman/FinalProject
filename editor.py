@@ -5,6 +5,8 @@ from classes import *
 room_settings = RoomSettings()
 til = Tiles(room_settings)
 
+
+loadmap = input("Load map name: ")
 def export_map(file):
     
     map_data = ""
@@ -17,10 +19,11 @@ def export_map(file):
         if t[1] > max_y:
             max_y = t[1]
     #Save Map Tiles
-    for tile in tile_data:
-        map_data = map_data + str(int(tile[0]/room_settings.screen_tile)) + "," + str(int(tile[1]/room_settings.screen_tile)) + ":" + tile[2] + "-"
+    for tile1 in tile_data:
+        print(tile1)
+        map_data = map_data + str(int(tile1[0]/room_settings.tile_size)) + "," + str(int(tile1[1]/room_settings.tile_size)) + ":" + tile1[2] + "-"
     #Save Map Dimensions
-    map_data = map_data + str(int(max_x/room_settings.screen_tile)) + "," + str(int(max_y/room_settings.screen_tile))
+    map_data = map_data + str(int(max_x/room_settings.tile_size)) + "," + str(int(max_y/room_settings.tile_size))
     #Write Map File
     with open(file, "w") as mapfile:
         mapfile.write(map_data)
@@ -47,19 +50,34 @@ brush = "1"
 
 #Initialize Default Map
 
-loadmap = input("Load map name: ")
+
 with open(os.path.join("finalProject/map", (loadmap + ".map")), "r") as map1:
     map1data = map1.read()
-map1data = map1data.split("-")
-map1size = map1data[len(map1data)-1]
+print(map1data)
+map1data = map1data.split("-") #Splits the tiles at the -'s
+map1size = map1data[len(map1data)-1] #Map dimentions
 map1data.remove(map1size)
+print(map1data)
+map1size = map1size.split(",")
+map1size[0] = int(map1size[0])*room_settings.screen_tile
+map1size[1] = int(map1size[1])*room_settings.screen_tile
 tiles = []
 for tile in range(len(map1data)):
     map1data[tile] = map1data[tile].replace("\n", "")
     tiles.append(map1data[tile].split(":")) #Split position from texture
 for tile in tiles:
     tile[0] = tile[0].split(",")
-tile_data = map1data
+    pos = tile[0]
+    for p in pos:
+        pos[pos.index(p)] = int(p) #Convert from text to int
+    tiles[tiles.index(tile)] = (pos, tile[1]) #Save to tile list
+#Create terrain as one object
+print(tiles)
+for tile in tiles:
+    xy = tile[0]
+    if tile[1] in til.texture_tags:
+        tile_data.append([xy[0]*room_settings.tile_size, xy[1]*room_settings.tile_size, tile[1]])
+print(tile_data)
 
 # for x in range(0, map_width, room_settings.tile_size):
 #     for y in range(0, map_height, room_settings.tile_size):
