@@ -47,9 +47,23 @@ brush = "1"
 
 #Initialize Default Map
 
-for x in range(0, map_width, room_settings.tile_size):
-    for y in range(0, map_height, room_settings.tile_size):
-        tile_data.append([x,y,"1"])
+loadmap = input("Load map name: ")
+with open(os.path.join("finalProject/map", (loadmap + ".map")), "r") as map1:
+    map1data = map1.read()
+map1data = map1data.split("-")
+map1size = map1data[len(map1data)-1]
+map1data.remove(map1size)
+tiles = []
+for tile in range(len(map1data)):
+    map1data[tile] = map1data[tile].replace("\n", "")
+    tiles.append(map1data[tile].split(":")) #Split position from texture
+for tile in tiles:
+    tile[0] = tile[0].split(",")
+tile_data = map1data
+
+# for x in range(0, map_width, room_settings.tile_size):
+#     for y in range(0, map_height, room_settings.tile_size):
+#         tile_data.append([x,y,"1"])
 
 
 while True:
