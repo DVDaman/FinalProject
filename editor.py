@@ -22,7 +22,7 @@ def export_map(file):
     for tile1 in tile_data:
         map_data = map_data + str(int(tile1[0]/room_settings.tile_size)) + "," + str(int(tile1[1]/room_settings.tile_size)) + ":" + tile1[2] + "~"
     #Save Map Dimensions
-    map_data = map_data + str(int(max_x/room_settings.tile_size)) + "," + str(int(max_y/room_settings.tile_size))
+    map_data = map_data + str(int(max_x/room_settings.tile_size)+1) + "," + str(int(max_y/room_settings.tile_size)+1)
     #Write Map File
     with open(file, "w") as mapfile:
         mapfile.write(map_data)
@@ -129,6 +129,8 @@ while True:
                 brush = brush + "h"
             if event.key == pygame.K_v:
                 brush = brush + "v"
+            if event.key == pygame.K_y:
+                brush = brush + "y"
         elif event.type == pygame.KEYUP:
             camera_move = 0
 
