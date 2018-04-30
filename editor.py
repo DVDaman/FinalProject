@@ -20,8 +20,7 @@ def export_map(file):
             max_y = t[1]
     #Save Map Tiles
     for tile1 in tile_data:
-        print(tile1)
-        map_data = map_data + str(int(tile1[0]/room_settings.tile_size)) + "," + str(int(tile1[1]/room_settings.tile_size)) + ":" + tile1[2] + "-"
+        map_data = map_data + str(int(tile1[0]/room_settings.tile_size)) + "," + str(int(tile1[1]/room_settings.tile_size)) + ":" + tile1[2] + "~"
     #Save Map Dimensions
     map_data = map_data + str(int(max_x/room_settings.tile_size)) + "," + str(int(max_y/room_settings.tile_size))
     #Write Map File
@@ -53,11 +52,9 @@ brush = "1"
 
 with open(os.path.join("finalProject/map", (loadmap + ".map")), "r") as map1:
     map1data = map1.read()
-print(map1data)
-map1data = map1data.split("-") #Splits the tiles at the -'s
+map1data = map1data.split("~") #Splits the tiles at the -'s
 map1size = map1data[len(map1data)-1] #Map dimentions
 map1data.remove(map1size)
-print(map1data)
 map1size = map1size.split(",")
 map1size[0] = int(map1size[0])*room_settings.screen_tile
 map1size[1] = int(map1size[1])*room_settings.screen_tile
@@ -72,12 +69,10 @@ for tile in tiles:
         pos[pos.index(p)] = int(p) #Convert from text to int
     tiles[tiles.index(tile)] = (pos, tile[1]) #Save to tile list
 #Create terrain as one object
-print(tiles)
 for tile in tiles:
     xy = tile[0]
     if tile[1] in til.texture_tags:
         tile_data.append([xy[0]*room_settings.tile_size, xy[1]*room_settings.tile_size, tile[1]])
-print(tile_data)
 
 # for x in range(0, map_width, room_settings.tile_size):
 #     for y in range(0, map_height, room_settings.tile_size):
