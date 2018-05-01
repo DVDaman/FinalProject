@@ -100,7 +100,7 @@ while True:
                 print("Success")
             #Brushes
             if event.key == pygame.K_BACKSPACE:
-                brush = "r"
+                brush = "remove"
             if event.key == pygame.K_1:
                 brush = "1"                
             if event.key == pygame.K_2:
@@ -131,6 +131,8 @@ while True:
                 brush = brush + "v"
             if event.key == pygame.K_y:
                 brush = brush + "y"
+            if event.key == pygame.K_p:
+                brush = brush + "p"
         elif event.type == pygame.KEYUP:
             camera_move = 0
 
@@ -146,10 +148,10 @@ while True:
                     found = True
                     break
             if not found:
-                if not brush == "r":
+                if not brush == "remove":
                     tile_data.append(tile)
             else:
-                if brush == "r":
+                if brush == "remove":
                     #Remove tile
                     for t in tile_data:
                         if t[0] == tile[0] and t[1] == tile[1]:
