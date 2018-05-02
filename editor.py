@@ -133,6 +133,8 @@ while True:
                 brush = brush + "y"
             if event.key == pygame.K_p:
                 brush = brush + "p"
+            if event.key == pygame.K_x:
+                brush = brush + "x"
         elif event.type == pygame.KEYUP:
             camera_move = 0
 
@@ -170,7 +172,7 @@ while True:
         camera_x -= room_settings.tile_size
 
     #Render Graphics
-    window.fill(pygame.Color(100, 30, 40))
+    window.fill(pygame.Color(100, 30, 80))
 
     #Draw Map
     for tile in tile_data:

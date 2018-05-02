@@ -50,7 +50,7 @@ while True:
     # Checks events
     gf.check_events(p, camera_settings) 
     p.update(player_settings)
-    camera_settings.update(deltatime, room_settings)
+    camera_settings.update(deltatime, room_settings, player_settings)
     # gf.slide(mapData, tileData, room_settings, player_settings, p, screen)
     
 
