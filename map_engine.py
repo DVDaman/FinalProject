@@ -34,4 +34,6 @@ class Map_Engine():
                 self.add_tile(t.texture_tags[tile[1]], tile[0], terrain)
             if tile[1] in t.blocked_types:
                 t.blocked.append(tile[0])
+            if tile[1] in t.speed_types:
+                t.speed.append(tile[0])
         return terrain

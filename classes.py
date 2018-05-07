@@ -80,7 +80,10 @@ class Tiles():
     def __init__(self, room_settings):
 
         self.blocked = []
-        self.blocked_types = ["2", "2b", "2bl", "2br", "2l", "2r", "2t", "2tl", "2tr"]
+        self.blocked_types = ["2", "2b", "2bl", "2br", "2l", "2r", "2t", "2tl", "2tr", "4bl", "4br", "4t", "4tl", "4tr", "5", "7", "7bl", "7br", "7t", "7tl", "7tr"]
+
+        self.speed = []
+        self.speed_types = ["5bl", "5blr", "5br", "5h", "5tbl", "5tbr", "5tl", "5tlr", "5tr", "5v", "5x"]
 
         ################
         self.t1 = pygame.transform.scale(pygame.image.load(os.path.join('finalProject/models/map','1.png')), (room_settings.screen_tile, room_settings.screen_tile))
@@ -220,9 +223,15 @@ class Tiles():
             return True
         else:
             return False
+    def speed_at(self, pos):
+        if list(pos) in self.speed:
+            return True
+        else:
+            return False
 
 class CameraSettings():
     def __init__(self):
+        self.spd = 1
         self.camerax = 0
         self.cameray = 0
         self.moving_up = False
@@ -230,15 +239,19 @@ class CameraSettings():
         self.moving_left = False
         self.moving_right = False
     def update(self, deltatime, room_settings, player_settings, tiles, p):
+        if tiles.speed_at((math.floor(p.x-.5), math.floor(p.y-.5))):
+            self.spd = 1.5
+        else:
+            self.spd = 1
         if self.moving_left:
-            if not tiles.blocked_at((math.floor(p.x-1), math.floor(p.y))):
-                self.camerax += deltatime * player_settings.p_speed_factor
+            if not tiles.blocked_at((math.floor(p.x-1), math.floor(p.y-.5))):
+                self.camerax += deltatime * player_settings.p_speed_factor * self.spd
         elif self.moving_right:
-            if not tiles.blocked_at((math.floor(p.x), math.floor(p.y))):
-                self.camerax -= deltatime * player_settings.p_speed_factor
+            if not tiles.blocked_at((math.floor(p.x), math.floor(p.y-.5))):
+                self.camerax -= deltatime * player_settings.p_speed_factor * self.spd
         elif self.moving_down:
-            if not tiles.blocked_at((math.floor(p.x), math.floor(p.y))):
-                self.cameray -= deltatime * player_settings.p_speed_factor
+            if not tiles.blocked_at((math.floor(p.x-.5), math.floor(p.y))):
+                self.cameray -= deltatime * player_settings.p_speed_factor * self.spd
         elif self.moving_up:
-            if not tiles.blocked_at((math.floor(p.x), math.floor(p.y-1))):
-                self.cameray += deltatime * player_settings.p_speed_factor
+            if not tiles.blocked_at((math.floor(p.x-.5), math.floor(p.y-1))):
+                self.cameray += deltatime * player_settings.p_speed_factor * self.spd
