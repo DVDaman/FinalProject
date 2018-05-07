@@ -1,10 +1,10 @@
 ###################
-import pygame, sys, os
+import pygame, sys, os, math
 from pygame.locals import *
 
 
 class Player():
-    def __init__(self, player_settings, room_settings, screen): 
+    def __init__(self, player_settings, room_settings, screen, camera_settings): 
         self.down1 = pygame.transform.scale(pygame.image.load(os.path.join('finalProject/models/player','player_down1.png')), (player_settings.player_width*room_settings.magnification, player_settings.player_width*room_settings.magnification))
         self.down2 = pygame.transform.scale(pygame.image.load(os.path.join('finalProject/models/player','player_down2.png')), (player_settings.player_width*room_settings.magnification, player_settings.player_width*room_settings.magnification))
         self.up1 = pygame.transform.scale(pygame.image.load(os.path.join('finalProject/models/player','player_up1.png')), (player_settings.player_width*room_settings.magnification, player_settings.player_width*room_settings.magnification))
@@ -16,15 +16,21 @@ class Player():
         self.image = self.down1
         self.rect =  self.image.get_rect()
         self.screen_rect = screen.get_rect()
-        self.screen_rect.centerx = room_settings.magnification * (room_settings.room_width/2)
-        self.screen_rect.bottom = room_settings.magnification * ((room_settings.room_height/2) + (room_settings.tile_size/2))
-        self.rect.centerx = self.screen_rect.centerx
-        self.rect.bottom = self.screen_rect.bottom
         self.screen = screen
         self.moving_up = False
         self.moving_down = False
         self.moving_left = False
         self.moving_right = False
+        self.height = player_settings.player_height*room_settings.magnification
+        self.width = player_settings.player_width*room_settings.magnification
+        self.x = ((room_settings.screen_width/2 + self.width/2 - camera_settings.camerax)/room_settings.screen_tile)
+        self.y = ((room_settings.screen_height/2 + self.height/2 - camera_settings.cameray)/room_settings.screen_tile)
+        self.screen_rect.right = (room_settings.screen_width/2 + self.width/2)
+        self.screen_rect.bottom = (room_settings.screen_height/2 - self.height/2)
+        self.rect.right = self.screen_rect.right
+        self.rect.bottom = self.screen_rect.centery
+
+
     def update(self, player_settings):
         if self.moving_left:
             # self.rect.centerx -= player_settings.p_speed_factor
@@ -38,8 +44,13 @@ class Player():
         elif self.moving_up:
             # self.rect.bottom -= player_settings.p_speed_factor
             self.image = self.up1
-    def blitme(self):
+    def blitme(self, room_settings, camera_settings):
+        self.rect.right = (room_settings.screen_width/2 + self.width/2)
+        self.rect.bottom = (room_settings.screen_height/2 + self.height/2)
+        self.x = ((room_settings.screen_width/2 + self.width/2 - camera_settings.camerax)/room_settings.screen_tile)
+        self.y = ((room_settings.screen_height/2 + self.height/2 - camera_settings.cameray)/room_settings.screen_tile)
         self.screen.blit(self.image, self.rect)
+        
 
 class RoomSettings():
     def __init__(self):
@@ -67,6 +78,9 @@ class PlayerSettings():
 
 class Tiles():
     def __init__(self, room_settings):
+
+        self.blocked = []
+        self.blocked_types = ["2", "2b", "2bl", "2br", "2l", "2r", "2t", "2tl", "2tr"]
 
         ################
         self.t1 = pygame.transform.scale(pygame.image.load(os.path.join('finalProject/models/map','1.png')), (room_settings.screen_tile, room_settings.screen_tile))
@@ -201,6 +215,11 @@ class Tiles():
         surface = pygame.Surface((room_settings.screen_tile, room_settings.screen_tile), pygame.HWSURFACE|pygame.SRCALPHA|pygame.DOUBLEBUF)
         surface.blit(bitmap, (0,0))
         return surface
+    def blocked_at(self, pos):
+        if list(pos) in self.blocked:
+            return True
+        else:
+            return False
 
 class CameraSettings():
     def __init__(self):
@@ -210,12 +229,16 @@ class CameraSettings():
         self.moving_down = False
         self.moving_left = False
         self.moving_right = False
-    def update(self, deltatime, room_settings, player_settings):
+    def update(self, deltatime, room_settings, player_settings, tiles, p):
         if self.moving_left:
-            self.camerax += deltatime * player_settings.p_speed_factor
+            if not tiles.blocked_at((math.floor(p.x-1), math.floor(p.y))):
+                self.camerax += deltatime * player_settings.p_speed_factor
         elif self.moving_right:
-            self.camerax -= deltatime * player_settings.p_speed_factor
+            if not tiles.blocked_at((math.floor(p.x), math.floor(p.y))):
+                self.camerax -= deltatime * player_settings.p_speed_factor
         elif self.moving_down:
-            self.cameray -= deltatime * player_settings.p_speed_factor
+            if not tiles.blocked_at((math.floor(p.x), math.floor(p.y))):
+                self.cameray -= deltatime * player_settings.p_speed_factor
         elif self.moving_up:
-            self.cameray += deltatime * player_settings.p_speed_factor
+            if not tiles.blocked_at((math.floor(p.x), math.floor(p.y-1))):
+                self.cameray += deltatime * player_settings.p_speed_factor

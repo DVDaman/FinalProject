@@ -1,12 +1,12 @@
 ###################
-import pygame, sys, time, os
+import pygame, sys, time, os, math
 from pygame.locals import *
 from classes import Player, PlayerSettings, RoomSettings
 
 
 
 
-def check_keydown_events(p, event, camera_settings):
+def check_keydown_events(p, event, camera_settings, tiles):
     if event.key == K_RIGHT:
         p.moving_right = True
         camera_settings.moving_right = True        
@@ -34,13 +34,13 @@ def check_keyup_events(p, event, camera_settings):
         p.moving_down = False
         camera_settings.moving_down = False
 
-def check_events(p, camera_settings):
+def check_events(p, camera_settings, tiles):
     for event in pygame.event.get():
         if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
             pygame.quit()
             sys.exit()
         elif event.type == KEYDOWN:
-            check_keydown_events(p, event, camera_settings)
+            check_keydown_events(p, event, camera_settings, tiles)
         elif event.type == KEYUP:
             check_keyup_events(p, event, camera_settings)
 
@@ -48,7 +48,7 @@ def update_screen(room_settings, screen, p, tiles, camera_settings, terrain):
     screen.blit(tiles.Sky, (0,0))
     screen.blit(terrain, (camera_settings.camerax, camera_settings.cameray))
     # render_terrain(room_settings, screen, tiles, camera_settings)
-    p.blitme()
+    p.blitme(room_settings, camera_settings)
 
 def render_terrain(room_settings, screen, tiles, camera_settings):
     for x in range(0, room_settings.screen_width, room_settings.screen_tile):

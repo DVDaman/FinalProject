@@ -19,14 +19,14 @@ def setup():
     screen = pygame.display.set_mode((room_settings.screen_width, room_settings.screen_height), pygame.HWSURFACE|pygame.SRCALPHA|pygame.DOUBLEBUF)
     pygame.display.set_caption("r/GantMemes")
     bg_color = room_settings.bg_color
-    p = Player(player_settings, room_settings, screen)
+    p = Player(player_settings, room_settings, screen, camera_settings)
     countSec = 0
     countFrame = 0
     FPS = 0
     deltatime = 0
     fps_font = pygame.font.Font("C://Windows//Fonts//PrestigeEliteStd-Bd.otf", (room_settings.magnification*10))
     tiles = Tiles(room_settings)
-    terrain = map_engine.load_map(os.path.join("finalProject/map", "world.map"))
+    terrain = map_engine.load_map(os.path.join("finalProject/map", "world.map"), tiles)
 
 def show_fps():
     fps_overlay = fps_font.render("FPS: "+str(FPS), True, (0, 255, 0, 100))
@@ -48,9 +48,9 @@ setup()
 while True:
     
     # Checks events
-    gf.check_events(p, camera_settings) 
+    gf.check_events(p, camera_settings, tiles) 
     p.update(player_settings)
-    camera_settings.update(deltatime, room_settings, player_settings)
+    camera_settings.update(deltatime, room_settings, player_settings, tiles, p)
     # gf.slide(mapData, tileData, room_settings, player_settings, p, screen)
     
 

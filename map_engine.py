@@ -2,13 +2,12 @@ import pygame
 from classes import *
 
 room_settings = RoomSettings()
-t = Tiles(room_settings)
 class Map_Engine():
     def __init__(self):
         self.a = "map"
     def add_tile(self, tile, pos, addTo):
         addTo.blit(tile, (pos[0]*room_settings.screen_tile, pos[1]*room_settings.screen_tile))
-    def load_map(self, file):
+    def load_map(self, file, t):
         with open(file, "r") as mapfile:
             map_data = mapfile.read()
         #Read tile data
@@ -33,4 +32,6 @@ class Map_Engine():
         for tile in tiles:
             if tile[1] in t.texture_tags:
                 self.add_tile(t.texture_tags[tile[1]], tile[0], terrain)
+            if tile[1] in t.blocked_types:
+                t.blocked.append(tile[0])
         return terrain
