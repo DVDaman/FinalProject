@@ -85,13 +85,13 @@ while True:
             pygame.quit()
             sys.exit()
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_w:
+            if event.key == pygame.K_UP:
                 camera_move = 1
-            elif event.key == pygame.K_s:
+            elif event.key == pygame.K_DOWN:
                 camera_move = 2
-            elif event.key == pygame.K_a:
+            elif event.key == pygame.K_LEFT:
                 camera_move = 3
-            elif event.key == pygame.K_d:
+            elif event.key == pygame.K_RIGHT:
                 camera_move = 4
             #Saving
             if event.key == pygame.K_RETURN:
@@ -115,6 +115,8 @@ while True:
                 brush = "6"
             if event.key == pygame.K_7:
                 brush = "7"
+            if event.key == pygame.K_8:
+                brush = "8"
             if event.key == pygame.K_t:
                 brush = brush + "t"
             if event.key == pygame.K_r:
@@ -135,6 +137,10 @@ while True:
                 brush = brush + "p"
             if event.key == pygame.K_x:
                 brush = brush + "x"
+            if event.key == pygame.K_u:
+                brush = brush + "u"
+            if event.key == pygame.K_d:
+                brush = brush + "d"
         elif event.type == pygame.KEYUP:
             camera_move = 0
 

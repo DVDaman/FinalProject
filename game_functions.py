@@ -47,22 +47,7 @@ def check_events(p, camera_settings, tiles):
 def update_screen(room_settings, screen, p, tiles, camera_settings, terrain):
     screen.blit(tiles.Sky, (0,0))
     screen.blit(terrain, (camera_settings.camerax, camera_settings.cameray))
-    # render_terrain(room_settings, screen, tiles, camera_settings)
     p.blitme(room_settings, camera_settings)
-
-def render_terrain(room_settings, screen, tiles, camera_settings):
-    for x in range(0, room_settings.screen_width, room_settings.screen_tile):
-        for y in range(0, room_settings.screen_height, room_settings.screen_tile):
-            # pygame.draw.rect(screen, (255, 255, 255), (x, y, room_settings.screen_tile+1, room_settings.screen_tile+1), 1)
-            # screen.blit(tiles.loadtexture(tiles.t3, room_settings), (x + camera_settings.camerax, y + camera_settings.cameray))
-            for i in map_data:
-                tile = (i[0] * room_settings.screen_tile, i[1] * room_settings.screen_tile)
-                if (x, y) == tile:
-                    screen.blit(i[2], (x + camera_settings.camerax, y + camera_settings.cameray))
-
-
-
-
 
 
 
