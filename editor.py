@@ -143,6 +143,8 @@ while True:
                 brush = brush + "d"
             if event.key == pygame.K_w:
                 brush = brush + "w"
+            if event.key == pygame.K_c:
+                brush = brush + "c"
         elif event.type == pygame.KEYUP:
             camera_move = 0
 

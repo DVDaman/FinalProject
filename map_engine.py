@@ -33,7 +33,13 @@ class Map_Engine():
             if tile[1] in t.texture_tags:
                 self.add_tile(t.texture_tags[tile[1]], tile[0], terrain)
             if tile[1] in t.blocked_types:
-                t.blocked.append(tile[0])
+                if file == os.path.join("finalProject/map", "world.map"):
+                    t.blockeda.append(tile[0])
+                elif file == os.path.join("finalProject/map", "cave.map"):
+                    t.blockedb.append(tile[0])
             if tile[1] in t.speed_types:
-                t.speed.append(tile[0])
+                if file == os.path.join("finalProject/map", "world.map"):
+                    t.speeda.append(tile[0])
+                elif file == os.path.join("finalProject/map", "cave.map"):
+                    t.speedb.append(tile[0])
         return terrain

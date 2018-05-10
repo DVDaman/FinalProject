@@ -44,9 +44,17 @@ def check_events(p, camera_settings, tiles):
         elif event.type == KEYUP:
             check_keyup_events(p, event, camera_settings)
 
-def update_screen(room_settings, screen, p, tiles, camera_settings, terrain):
-    screen.blit(tiles.Sky, (0,0))
-    screen.blit(terrain, (camera_settings.camerax, camera_settings.cameray))
+def update_screen(room_settings, screen, p, tiles, camera_settings, terraina, map_engine, terrainb):
+    if (math.floor(p.x-.5), math.floor(p.y-.5)) == (14, 3) and (room_settings.mp == "world.map"):
+        room_settings.mp = "cave.map"
+    elif (math.floor(p.x-.5), math.floor(p.y-.5)) == (14, 4) and (room_settings.mp == "cave.map"):
+        room_settings.mp = "world.map"
+    if room_settings.mp == "world.map":
+        screen.blit(tiles.Sky, (0,0))
+        screen.blit(terraina, (camera_settings.camerax, camera_settings.cameray))
+    elif room_settings.mp == "cave.map":
+        screen.fill(pygame.Color(0,0,0,100))
+        screen.blit(terrainb, (camera_settings.camerax, camera_settings.cameray))
     p.blitme(room_settings, camera_settings)
 
 

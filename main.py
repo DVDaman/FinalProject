@@ -11,7 +11,7 @@ pygame.init()
 clock = pygame.time.Clock()
 
 def setup():
-    global room_settings, screen, bg_color, p, player_settings, countSec, countFrame, FPS, fps_font, tiles, camera_settings, deltatime, terrain, map_engine
+    global room_settings, screen, bg_color, p, player_settings, countSec, countFrame, FPS, fps_font, tiles, camera_settings, deltatime, terraina, map_engine, terrainb
     room_settings = RoomSettings()
     player_settings = PlayerSettings(room_settings)
     camera_settings = CameraSettings()
@@ -26,7 +26,8 @@ def setup():
     deltatime = 0
     fps_font = pygame.font.Font("C://Windows//Fonts//PrestigeEliteStd-Bd.otf", (room_settings.magnification*10))
     tiles = Tiles(room_settings)
-    terrain = map_engine.load_map(os.path.join("finalProject/map", "world.map"), tiles)
+    terraina = map_engine.load_map(os.path.join("finalProject/map", "world.map"), tiles)
+    terrainb = map_engine.load_map(os.path.join("finalProject/map", "cave.map"), tiles)
 
 def show_fps():
     fps_overlay = fps_font.render("FPS: "+str(FPS), True, (0, 255, 0, 100))
@@ -55,7 +56,7 @@ while True:
     
 
 
-    gf.update_screen(room_settings, screen, p, tiles, camera_settings, terrain)
+    gf.update_screen(room_settings, screen, p, tiles, camera_settings, terraina, map_engine, terrainb)
 
     show_fps()
     #Reloads the screen
