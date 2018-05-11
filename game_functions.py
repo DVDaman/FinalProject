@@ -7,6 +7,7 @@ from classes import Player, PlayerSettings, RoomSettings
 
 
 def check_keydown_events(p, event, camera_settings, tiles):
+    #If an arrow is pressed the player will move
     if event.key == K_RIGHT:
         p.moving_right = True
         camera_settings.moving_right = True        
@@ -21,6 +22,7 @@ def check_keydown_events(p, event, camera_settings, tiles):
         camera_settings.moving_down = True
 
 def check_keyup_events(p, event, camera_settings):
+    #If an arrow is no longer pressed the player will stop moving
     if event.key == K_RIGHT:
         p.moving_right = False
         camera_settings.moving_right = False
@@ -35,6 +37,7 @@ def check_keyup_events(p, event, camera_settings):
         camera_settings.moving_down = False
 
 def check_events(p, camera_settings, tiles):
+    #checks to see if a key is pressed or no longer pressed
     for event in pygame.event.get():
         if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
             pygame.quit()
@@ -45,16 +48,19 @@ def check_events(p, camera_settings, tiles):
             check_keyup_events(p, event, camera_settings)
 
 def update_screen(room_settings, screen, p, tiles, camera_settings, terraina, map_engine, terrainb):
+    #Check to see if the player needs to change maps
     if (math.floor(p.x-.5), math.floor(p.y-.5)) == (14, 3) and (room_settings.mp == "world.map"):
         room_settings.mp = "cave.map"
     elif (math.floor(p.x-.5), math.floor(p.y-.5)) == (14, 4) and (room_settings.mp == "cave.map"):
         room_settings.mp = "world.map"
+    #Based on the map, it will blit the terrain and the background
     if room_settings.mp == "world.map":
         screen.blit(tiles.Sky, (0,0))
         screen.blit(terraina, (camera_settings.camerax, camera_settings.cameray))
     elif room_settings.mp == "cave.map":
         screen.fill(pygame.Color(0,0,0,100))
         screen.blit(terrainb, (camera_settings.camerax, camera_settings.cameray))
+    #Player blitted
     p.blitme(room_settings, camera_settings)
 
 

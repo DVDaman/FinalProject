@@ -11,6 +11,7 @@ pygame.init()
 clock = pygame.time.Clock()
 
 def setup():
+    #Creates all the variables and calls all the classes
     global room_settings, screen, bg_color, p, player_settings, countSec, countFrame, FPS, fps_font, tiles, camera_settings, deltatime, terraina, map_engine, terrainb
     room_settings = RoomSettings()
     player_settings = PlayerSettings(room_settings)
@@ -30,10 +31,12 @@ def setup():
     terrainb = map_engine.load_map(os.path.join("finalProject/map", "cave.map"), tiles)
 
 def show_fps():
+    #Renders FPS on screen
     fps_overlay = fps_font.render("FPS: "+str(FPS), True, (0, 255, 0, 100))
     screen.blit(fps_overlay, (0,0))
 
 def count_fps():
+    #Counts how many times the game loop runs each second
     global countFrame, countSec, FPS, deltatime
     if countSec == time.strftime("%S"):
         countFrame += 1
@@ -42,7 +45,7 @@ def count_fps():
         countFrame = 0
         countSec = time.strftime("%S")
         if FPS > 0:
-            # to set the same speed for all FPS if stable
+            #To set the same player speed for all FPS if stable
             deltatime = 1 / FPS
 
 setup()
@@ -52,10 +55,9 @@ while True:
     gf.check_events(p, camera_settings, tiles) 
     p.update(player_settings)
     camera_settings.update(deltatime, room_settings, player_settings, tiles, p)
-    # gf.slide(mapData, tileData, room_settings, player_settings, p, screen)
     
 
-
+    #Blits everything
     gf.update_screen(room_settings, screen, p, tiles, camera_settings, terraina, map_engine, terrainb)
 
     show_fps()

@@ -5,6 +5,7 @@ from pygame.locals import *
 
 class Player():
     def __init__(self, player_settings, room_settings, screen, camera_settings): 
+        #Player images (the 2's are not used because we did not figure out how to animate the player)
         self.down1 = pygame.transform.scale(pygame.image.load(os.path.join('finalProject/models/player','player_down1.png')), (player_settings.player_width*room_settings.magnification, player_settings.player_width*room_settings.magnification))
         self.down2 = pygame.transform.scale(pygame.image.load(os.path.join('finalProject/models/player','player_down2.png')), (player_settings.player_width*room_settings.magnification, player_settings.player_width*room_settings.magnification))
         self.up1 = pygame.transform.scale(pygame.image.load(os.path.join('finalProject/models/player','player_up1.png')), (player_settings.player_width*room_settings.magnification, player_settings.player_width*room_settings.magnification))
@@ -14,6 +15,7 @@ class Player():
         self.right1 = pygame.transform.flip(self.left1, True, False)
         self.right2 = pygame.transform.flip(self.left2, True, False)
         self.image = self.down1
+        #Gets rect's
         self.rect =  self.image.get_rect()
         self.screen_rect = screen.get_rect()
         self.screen = screen
@@ -21,6 +23,7 @@ class Player():
         self.moving_down = False
         self.moving_left = False
         self.moving_right = False
+        #location and dimentions of player
         self.height = player_settings.player_height*room_settings.magnification
         self.width = player_settings.player_width*room_settings.magnification
         self.x = ((room_settings.screen_width/2 + self.width/2 - camera_settings.camerax)/room_settings.screen_tile)
@@ -30,8 +33,8 @@ class Player():
         self.rect.right = self.screen_rect.right
         self.rect.bottom = self.screen_rect.centery
 
-
     def update(self, player_settings):
+        #sets the image for the direction of the player
         if self.moving_left:
             # self.rect.centerx -= player_settings.p_speed_factor
             self.image = self.left1
@@ -45,6 +48,7 @@ class Player():
             # self.rect.bottom -= player_settings.p_speed_factor
             self.image = self.up1
     def blitme(self, room_settings, camera_settings):
+        #blits player and updates position
         self.rect.right = (room_settings.screen_width/2 + self.width/2)
         self.rect.bottom = (room_settings.screen_height/2 + self.height/2)
         self.x = ((room_settings.screen_width/2 + self.width/2 - camera_settings.camerax)/room_settings.screen_tile)
@@ -54,6 +58,7 @@ class Player():
 
 class RoomSettings():
     def __init__(self):
+        #All the dimentions of things on the screen and the screen
         self.room_width = 256
         self.room_height = 176
         self.magnification = 4
@@ -70,6 +75,7 @@ class RoomSettings():
 
 class PlayerSettings():
     def __init__(self, room_settings):
+        #Player stats
         self.player_width = 16
         self.player_height = 16
         self.p_speed_factor = room_settings.magnification * 75
@@ -79,17 +85,18 @@ class PlayerSettings():
 
 class Tiles():
     def __init__(self, room_settings):
-
+        #Blocked and speed tiles for each map 
         self.blockeda = []
         self.blockedb = []
         self.speeda = []     
         self.speedb = []   
         
-
+        #Types of tile that are blocked and speed
         self.blocked_types = ["2", "2b", "2bl", "2br", "2l", "2r", "2t", "2tl", "2tr", "3cibl", "3cibr", "3citl", "3citr", "4bl", "4br", "4t", "4tl", "4tr", "4x", "5", "7", "7bl", "7br", "7t", "7tl", "7tr", "8", "8l", "8r"]
         self.speed_types = ["5bl", "5blr", "5br", "5h", "5tbl", "5tbr", "5tl", "5tlr", "5tr", "5v", "5x"]
 
         ################
+        #Tile images scaled up with magnification
         self.t1 = pygame.transform.scale(pygame.image.load(os.path.join('finalProject/models/map','1.png')), (room_settings.screen_tile, room_settings.screen_tile))
         self.t1b = pygame.transform.scale(pygame.image.load(os.path.join('finalProject/models/map','1b.png')), (room_settings.screen_tile, room_settings.screen_tile))
         self.t1p = pygame.transform.scale(pygame.image.load(os.path.join('finalProject/models/map','1p.png')), (room_settings.screen_tile, room_settings.screen_tile))
@@ -179,6 +186,7 @@ class Tiles():
         self.t8tr = pygame.transform.scale(pygame.image.load(os.path.join('finalProject/models/map','8tr.png')), (room_settings.screen_tile, room_settings.screen_tile))
         self.t8w = pygame.transform.scale(pygame.image.load(os.path.join('finalProject/models/map','8w.png')), (room_settings.screen_tile, room_settings.screen_tile))
         ###################
+        #Base size tile images
         self.u1 = pygame.image.load(os.path.join('finalProject/models/map','1.png'))
         self.u1b = pygame.image.load(os.path.join('finalProject/models/map','1b.png'))
         self.u1p = pygame.image.load(os.path.join('finalProject/models/map','1p.png'))
@@ -268,20 +276,24 @@ class Tiles():
         self.u8tr = pygame.image.load(os.path.join('finalProject/models/map','8tr.png'))
         self.u8w = pygame.image.load(os.path.join('finalProject/models/map','8w.png'))
         ###############
+        #Dictionaries for both scaled and unscaled images
         self.texture_tags = {"1":self.t1, "1b":self.t1b, "1p":self.t1p, "1r":self.t1r, "1y":self.t1y, "2":self.t2, "2b":self.t2b, "2bl":self.t2bl, "2br":self.t2br, "2ibl":self.t2ibl, "2ibr":self.t2ibr, "2itl":self.t2itl, "2itr":self.t2itr, "2l":self.t2l, "2pd":self.t2pd, "2pl":self.t2pl, "2pr":self.t2pr, "2pu":self.t2pu, "2r":self.t2r, "2t":self.t2t, "2tl":self.t2tl, "2tr":self.t2tr, "3":self.t3, "3b":self.t3b, "3bl":self.t3bl, "3br":self.t3br, "3c":self.t3c, "3cb":self.t3cb, "3cbl":self.t3cbl, "3cbr":self.t3cbr, "3cibl":self.t3cibl, "3cibr":self.t3cibr, "3citl":self.t3citl, "3citr":self.t3citr, "3cl":self.t3cl, "3cr":self.t3cr, "3ct":self.t3ct, "3ctl":self.t3ctl, "3ctr":self.t3ctr, "3ibl":self.t3ibl, "3ibr":self.t3ibr, "3itl":self.t3itl, "3itr":self.t3itr, "3l":self.t3l, "3r":self.t3r, "3t":self.t3t, "3tl":self.t3tl, "3tr":self.t3tr, "4":self.t4, "4bl":self.t4bl, "4br":self.t4br, "4t":self.t4t, "4tl":self.t4tl, "4tr":self.t4tr, "4x":self.t4x, "5":self.t5, "5bl":self.t5bl, "5blr":self.t5blr, "5br":self.t5br, "5h":self.t5h, "5tbl":self.t5tbl, "5tbr":self.t5tbr, "5tl":self.t5tl, "5tlr":self.t5tlr, "5tr":self.t5tr, "5v":self.t5v, "5x":self.t5x, "6h":self.t6h, "6d":self.t6d, "6u":self.t6u, "6v":self.t6v, "7":self.t7, "7bl":self.t7bl, "7br":self.t7br, "7t":self.t7t, "7tl":self.t7tl, "7tr":self.t7tr, "8":self.t8, "8d":self.t8d, "8l":self.t8l, "8r":self.t8r, "8t":self.t8t, "8tb":self.t8tb, "8tbl":self.t8tbl, "8tbr":self.t8tbr, "8tl":self.t8tl, "8tr":self.t8tr, "8w":self.t8w}
 
         self.utexture_tags = {"1":self.u1, "1b":self.u1b, "1p":self.u1p, "1r":self.u1r, "1y":self.u1y, "2":self.u2, "2b":self.u2b, "2bl":self.u2bl, "2br":self.u2br, "2ibl":self.u2ibl, "2ibr":self.u2ibr, "2itl":self.u2itl, "2itr":self.u2itr, "2l":self.u2l, "2pd":self.u2pd, "2pl":self.u2pl, "2pr":self.u2pr, "2pu":self.u2pu, "2r":self.u2r, "2t":self.u2t, "2tl":self.u2tl, "2tr":self.u2tr, "3":self.u3, "3b":self.u3b, "3bl":self.u3bl, "3br":self.u3br, "3c":self.u3c, "3cb":self.u3cb, "3cbl":self.u3cbl, "3cbr":self.u3cbr, "3cibl":self.u3cibl, "3cibr":self.u3cibr, "3citl":self.u3citl, "3citr":self.u3citr, "3cl":self.u3cl, "3cr":self.u3cr, "3ct":self.u3ct, "3ctl":self.u3ctl, "3ctr":self.u3ctr, "3ibl":self.u3ibl, "3ibr":self.u3ibr, "3itl":self.u3itl, "3itr":self.u3itr, "3l":self.u3l, "3r":self.u3r, "3t":self.u3t, "3tl":self.u3tl, "3tr":self.u3tr, "4":self.u4, "4bl":self.u4bl, "4br":self.u4br, "4t":self.u4t, "4tl":self.u4tl, "4tr":self.u4tr, "4x":self.u4x, "5":self.u5, "5bl":self.u5bl, "5blr":self.u5blr, "5br":self.u5br, "5h":self.u5h, "5tbl":self.u5tbl, "5tbr":self.u5tbr, "5tl":self.u5tl, "5tlr":self.u5tlr, "5tr":self.u5tr, "5v":self.u5v, "5x":self.u5x, "6h":self.u6h, "6d":self.u6d, "6u":self.u6u, "6v":self.u6v, "7":self.u7, "7bl":self.u7bl, "7br":self.u7br, "7t":self.u7t, "7tl":self.u7tl, "7tr":self.u7tr, "8":self.u8, "8d":self.u8d, "8l":self.u8l, "8r":self.u8r, "8t":self.u8t, "8tb":self.u8tb, "8tbl":self.u8tbl, "8tbr":self.u8tbr, "8tl":self.u8tl, "8tr":self.u8tr, "8w":self.u8w}
 
+        #Sky background
         self.sky = pygame.transform.scale(pygame.image.load(os.path.join('finalProject/models/map', 'sky.png')), (room_settings.screen_width, room_settings.screen_height))
         self.Sky = pygame.Surface(self.sky.get_size(), pygame.HWSURFACE|pygame.DOUBLEBUF|pygame.SRCALPHA)
         self.Sky.blit(self.sky, (0,0))
         del self.sky
         self.size = room_settings.screen_tile
-    def loadtexture(self, file, room_settings):
-        bitmap = file
-        surface = pygame.Surface((room_settings.screen_tile, room_settings.screen_tile), pygame.HWSURFACE|pygame.SRCALPHA|pygame.DOUBLEBUF)
-        surface.blit(bitmap, (0,0))
-        return surface
+    # def loadtexture(self, file, room_settings):
+    #     bitmap = file
+    #     surface = pygame.Surface((room_settings.screen_tile, room_settings.screen_tile), pygame.HWSURFACE|pygame.SRCALPHA|pygame.DOUBLEBUF)
+    #     surface.blit(bitmap, (0,0))
+    #     return surface
+
+    #Checks if tile is blocked or speed
     def blocked_at(self, pos, room_settings):
         if room_settings.mp == "world.map":
             if list(pos) in self.blockeda:
@@ -307,6 +319,7 @@ class Tiles():
 
 class CameraSettings():
     def __init__(self):
+        #pos and speed vars
         self.spd = 1
         self.camerax = 0
         self.cameray = 0
@@ -315,6 +328,7 @@ class CameraSettings():
         self.moving_left = False
         self.moving_right = False
     def update(self, deltatime, room_settings, player_settings, tiles, p):
+        #Moves the player based on speed, FPS, blocked tiles, and speed tiles
         if tiles.speed_at((math.floor(p.x-.5), math.floor(p.y-.5)), room_settings):
             self.spd = 1.5
         else:

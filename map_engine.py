@@ -11,10 +11,10 @@ class Map_Engine():
         with open(file, "r") as mapfile:
             map_data = mapfile.read()
         #Read tile data
-        map_data = map_data.split("~") #Splits the tiles at the -'s
+        map_data = map_data.split("~") #Splits the tiles at the ~'s
         map_size = map_data[len(map_data)-1] #Map dimentions
-        map_data.remove(map_size)
-        map_size = map_size.split(",")
+        map_data.remove(map_size) 
+        map_size = map_size.split(",") 
         map_size[0] = int(map_size[0])*room_settings.screen_tile
         map_size[1] = int(map_size[1])*room_settings.screen_tile
         tiles = []
@@ -25,13 +25,15 @@ class Map_Engine():
             tile[0] = tile[0].split(",")
             pos = tile[0]
             for p in pos:
-                pos[pos.index(p)] = int(p) #Convert from text to int
+                pos[pos.index(p)] = int(p) #Convert postion from text to int
             tiles[tiles.index(tile)] = (pos, tile[1]) #Save to tile list
         #Create terrain as one object
         terrain = pygame.Surface(map_size, pygame.HWSURFACE)
         for tile in tiles:
             if tile[1] in t.texture_tags:
+                #blits each tile
                 self.add_tile(t.texture_tags[tile[1]], tile[0], terrain)
+                #checks for blocked and speed tiles
             if tile[1] in t.blocked_types:
                 if file == os.path.join("finalProject/map", "world.map"):
                     t.blockeda.append(tile[0])
