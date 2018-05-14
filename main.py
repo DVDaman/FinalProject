@@ -1,3 +1,12 @@
+"""
+Many concepts and functions were inspired by Meloonatic Melons on Youtube but
+all needed to be adapted and modified to fit into this code. The player texures
+are from nesZeldaWalkingTour by Al Sweigart and the terrain texture are 
+inspired by the nesZeldaWalkingTour but have been modified and new ones have 
+been added.
+"""
+##############################################Daniele and Curran###############################################
+
 import pygame, random, sys, os, time
 from pygame.locals import *
 from classes import *
